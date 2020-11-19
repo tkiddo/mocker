@@ -35,8 +35,10 @@ jobs:
           npm -v
 
       # install devs
-      - name: install
-        run: npm install
+      - name: install devs
+        run: |
+          npm install -g cross-env
+          cross-env ELECTRON_MIRROR="https://npm.taobao.org/mirrors/electron/" npm install
 
       # run linting
       - name: lint
