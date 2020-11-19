@@ -23,6 +23,6 @@ describe('Application launch', function () {
 
   it('shows an initial window', async function () {
     const count = await app.client.getWindowCount();
-    return assert.equal(count, 1);
+    return assert.strictEqual(count, 1);
   });
 });
