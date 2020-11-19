@@ -31,8 +31,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: node version and npm version
         run: |
-          node -v,
-          npm -v.
+          node -v
+          npm -v
 
       # install devs
       - name: install
