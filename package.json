@@ -1,20 +1,24 @@
 {
   "name": "mocker",
   "version": "1.0.0",
-  "description": "模拟数据生成器",
-  "main": "main/index.js",
+  "description": "data mocker",
+  "main": "main.js",
   "scripts": {
     "test": "mocha",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "start": "electron main/index.js"
+    "start": "electron .",
+    "dev": "electron . --debug"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tkiddo/mocker.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "mock",
+    "electron"
+  ],
+  "author": "tkiddo",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tkiddo/mocker/issues"
@@ -28,6 +32,7 @@
     "spectron": "^12.0.0"
   },
   "dependencies": {
-    "electron": "^10.0.0"
+    "electron": "^10.0.0",
+    "faker": "^5.1.0"
   }
 }
