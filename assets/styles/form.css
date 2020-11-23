@@ -1,0 +1,53 @@
+.form {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 111111;
+  width: 300px;
+  box-shadow: 3px 3px 5px lightgray;
+  background-color: #fff;
+  padding-top: 20px;
+  border-radius: 5px;
+  transition: transform ease 0.5s;
+}
+
+.form-show {
+  transform: translate(-50%, 0);
+}
+
+.form-hide {
+  transform: translate(-50%, -115%);
+}
+
+.form-header {
+  padding-left: 30px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.form-footer {
+  background-color: rgb(243, 240, 240);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  border-radius: 0 0 5px 5px;
+}
+
+.form-footer > div {
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: #fff;
+  color: #111;
+}
+
+.sure-btn {
+  background-color: green;
+  color: #fff;
+  margin-left: 10px;
+}

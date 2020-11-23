@@ -14,7 +14,6 @@ class Mocker {
     try {
       return this.faker[column][method]();
     } catch (error) {
-      console.error(error);
       return undefined;
     }
   }

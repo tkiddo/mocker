@@ -1,47 +1,32 @@
-// const Application = require('spectron').Application;
-// const assert = require('assert');
-// const electronPath = require('electron'); // Require Electron from the binaries included in node_modules.
-// const path = require('path');
+const electron = require('electron');
+const puppeteer = require('puppeteer-core');
+const { spawn } = require('child_process');
+const assert = require('assert');
 
-// describe('Application launch', function () {
-//   this.timeout(10000);
+let spawnProcess = spawn(electron, ['.', `--remote-debugging-port=9200`], {
+  shell: true
+});
 
-//   beforeEach(function () {
-//     this.app = new Application({
-//       // Your electron path can be any binary
-//       // i.e for OSX an example path could be '/Applications/MyApp.app/Contents/MacOS/MyApp'
-//       // But for the sake of the example we fetch it from our node_modules.
-//       path: electronPath,
+let app = null;
+let page = null;
 
-//       // Assuming you have the following directory structure
+describe('Application launch', function () {
+  this.timeout(10000);
 
-//       //  |__ my project
-//       //     |__ ...
-//       //     |__ main.js
-//       //     |__ package.json
-//       //     |__ index.html
-//       //     |__ ...
-//       //     |__ test
-//       //        |__ spec.js  <- You are here! ~ Well you should be.
+  beforeEach(async function () {
+    app = await puppeteer.connect({ browserURL: 'http://localhost:9200' });
+    [page] = await app.pages();
+    page.setViewport({ width: 1080, height: 840 });
+  });
 
-//       // The following line tells spectron to look and use the main.js file
-//       // and the package.json located 1 level above.
-//       args: [path.join(__dirname, '..')]
-//     });
-//     return this.app.start();
-//   });
+  afterEach(async function () {
+    if (app) {
+      app.close();
+    }
+  });
 
-//   afterEach(function () {
-//     if (this.app && this.app.isRunning()) {
-//       return this.app.stop();
-//     }
-//   });
-
-//   it('shows an initial window', function () {
-//     return this.app.client.getWindowCount().then(function (count) {
-//       assert.equal(count, 1);
-//       // Please note that getWindowCount() will return 2 if `dev tools` are opened.
-//       // assert.equal(count, 2)
-//     });
-//   });
-// });
+  it('should have a button with class "add-tpl"', async () => {
+    const element = await page.$$('.add-tpl');
+    assert.strictEqual(element.length, 1);
+  });
+});
