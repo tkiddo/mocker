@@ -45,3 +45,6 @@ jobs:
         with:
           name: report
           path: report.json
+
+        env:
+          CI: true
