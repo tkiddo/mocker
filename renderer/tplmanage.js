@@ -2,6 +2,7 @@ const tplAddBtn = document.querySelector('.add-tpl');
 const form = document.querySelector('#tpl-add-form');
 const cancelBtn = document.querySelector('#tpl-cancel-btn');
 const sureBtn = document.querySelector('#tpl-sure-btn');
+const tplList = document.querySelector('.tpl-list');
 
 const showForm = () => {
   form.classList.replace('form-hide', 'form-show');
@@ -9,6 +10,13 @@ const showForm = () => {
 
 const hideForm = () => {
   form.classList.replace('form-show', 'form-hide');
+};
+
+const addItemToList = (item) => {
+  const element = document.createElement('div');
+  element.classList.add('tpl-item');
+  element.innerText = item.name;
+  tplList.appendChild(element);
 };
 
 cancelBtn.addEventListener('click', () => {
@@ -21,5 +29,6 @@ tplAddBtn.addEventListener('click', () => {
 
 sureBtn.addEventListener('click', () => {
   const formData = new FormData(form);
-  console.log(formData.get('name'));
+  addItemToList({ name: formData.get('name') });
+  hideForm();
 });

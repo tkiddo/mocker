@@ -1,0 +1,22 @@
+.tpl-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+}
+
+.tpl-list .tpl-item {
+  padding: 10px 15px;
+  width: 100%;
+  text-align: left;
+  color: #555;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.tpl-item:hover {
+  background-color: rgb(241, 239, 239);
+}
