@@ -36,9 +36,9 @@ jobs:
       - name: Run Linting
         run: npm run lint:fix
 
-      # run testing
-      - name: Run test
-        run: npm run test
+        # # run testing
+        # - name: Run test
+        #   run: npm run test
 
         # - name: Upload Test Report
         #   uses: actions/upload-artifact@v1
