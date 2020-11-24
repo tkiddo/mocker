@@ -1,7 +1,7 @@
 const assert = require('assert');
-const mocker = require('../renderer/mocker');
+const mocker = require('../renderer/faker');
 
-describe('mocker working', function () {
+describe('faker working', function () {
   this.timeout(10000);
 
   it('default locale should be en_US', () => {

@@ -1,4 +1,4 @@
-const mocker = require('./mocker');
+const mocker = require('./faker');
 
 console.log(mocker.generateData('address', 'country'));
 

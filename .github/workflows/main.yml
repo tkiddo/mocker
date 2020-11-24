@@ -38,13 +38,13 @@ jobs:
 
       # run testing
       - name: Run test
-        run: npm run generate-test-report
+        run: npm run test
 
-      - name: Upload Test Report
-        uses: actions/upload-artifact@v1
-        with:
-          name: report
-          path: report.json
+        # - name: Upload Test Report
+        #   uses: actions/upload-artifact@v1
+        #   with:
+        #     name: report
+        #     path: report.json
 
         env:
           CI: true
