@@ -1,4 +1,4 @@
-require('./import.js');
+require('./common.js');
 
 require('./sideList.js');
 

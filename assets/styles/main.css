@@ -20,12 +20,12 @@ label {
 .left-content {
   width: 200px;
   height: 100%;
-  box-shadow: 5px 0 5px lightgray;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px 0;
   background-color: #e8e8e8;
+  border-right: #e8e8e8 solid 1px;
 }
 
 .right-content {
