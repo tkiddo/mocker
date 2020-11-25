@@ -1,0 +1,17 @@
+.tpl-tabs {
+  width: 100%;
+  background-color: #e8e8e8;
+  height: 40px;
+  display: flex;
+}
+
+.tpl-tab {
+  width: 80px;
+  height: 100%;
+  background-color: #f4f4f2;
+  text-align: center;
+}
+
+.tpl-tab-active {
+  background-color: #fff;
+}

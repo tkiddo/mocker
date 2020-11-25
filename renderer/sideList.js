@@ -1,3 +1,5 @@
+const { addTab } = require('./tabs');
+
 const tplAddBtn = document.querySelector('.add-tpl');
 const form = document.querySelector('#tpl-add-form');
 const cancelBtn = document.querySelector('#tpl-cancel-btn');
@@ -29,6 +31,8 @@ tplAddBtn.addEventListener('click', () => {
 
 sureBtn.addEventListener('click', () => {
   const formData = new FormData(form);
-  addItemToList({ name: formData.get('name') });
+  const name = formData.get('name');
+  addItemToList({ name });
+  addTab({ name });
   hideForm();
 });
