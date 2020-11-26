@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: tkiddo
+ * @Date: 2020-11-26 15:20:27
+ * @LastEditors: tkiddo
+ * @LastEditTime: 2020-11-26 19:35:57
+ */
 const electron = require('electron');
 const puppeteer = require('puppeteer-core');
 const { spawn } = require('child_process');
@@ -25,12 +32,18 @@ describe('Application launch', function () {
     }
   });
 
-  it('should have a button with class "add-tpl"', async () => {
+  it('有一个添加数据模版按钮', async () => {
     const btns = await page.$$('.add-tpl');
     assert.strictEqual(btns.length, 1);
   });
 
-  it('should show form successfully', async () => {
+  it('第一次运行时，数据模版列表为空', async () => {
+    const tplList = await page.$('.tpl-list');
+    const len = tplList.children.length;
+    assert.strictEqual(len, 0);
+  });
+
+  it('点击添加数据模版按钮，表单弹出', async () => {
     const tplAddBtn = await page.$('.add-tpl');
     await tplAddBtn.click();
     const className = await page.$eval('.form', (el) => el.getAttribute('class'));

@@ -2,7 +2,7 @@
  * @Description:左边模版列表维护
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
- * @LastEditTime: 2020-11-26 10:46:56
+ * @LastEditTime: 2020-11-26 16:04:51
  * @LastEditors: tkiddo
  */
 
@@ -66,9 +66,6 @@ const createElement = (item) => {
  */
 const addItemToList = (item) => {
   ipcRenderer.send('add-tpl-item', item);
-  ipcRenderer.once('task-done', () => {
-    setActiveItem(createElement(item));
-  });
 };
 
 /**
@@ -83,6 +80,10 @@ const initList = () => {
       createElement(item);
     });
   }
+  // 监听主进程事件，并创建页面元素
+  ipcRenderer.on('tpl-item-added', (event, item) => {
+    setActiveItem(createElement(item));
+  });
 };
 
 // 取消按钮点击事件

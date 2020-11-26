@@ -1,3 +1,10 @@
+/*
+ * @Description: 与渲染进程沟通
+ * @Author: tkiddo
+ * @Date: 2020-11-26 15:20:27
+ * @LastEditors: tkiddo
+ * @LastEditTime: 2020-11-26 16:00:05
+ */
 /* eslint-disable no-param-reassign */
 const { ipcMain } = require('electron');
 const { join } = require('path');
@@ -17,5 +24,5 @@ ipcMain.on('add-tpl-item', (event, item) => {
   }
   original.push(item);
   writeFile(filePath, original);
-  event.reply('task-done');
+  event.reply('tpl-item-added', item);
 });
