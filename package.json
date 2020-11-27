@@ -33,6 +33,7 @@
     "puppeteer-core": "^5.5.0"
   },
   "dependencies": {
+    "electron": "^11.0.3",
     "mockjs": "^1.1.0"
   },
   "standard": {
