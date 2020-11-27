@@ -2,7 +2,7 @@
  * @Description:左边模版列表维护
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
- * @LastEditTime: 2020-11-26 16:04:51
+ * @LastEditTime: 2020-11-27 10:38:16
  * @LastEditors: tkiddo
  */
 
@@ -43,7 +43,9 @@ const setActiveItem = (target) => {
   Array.prototype.forEach.call(allElements, (ele) => {
     ele.classList.remove('tpl-item-active');
   });
-  target.classList.add('tpl-item-active');
+  if (target.classList.contains('tpl-item')) {
+    target.classList.add('tpl-item-active');
+  }
 };
 
 /**
@@ -52,11 +54,14 @@ const setActiveItem = (target) => {
  * @return {HTMLElement}
  */
 const createElement = (item) => {
-  const element = document.createElement('div');
-  element.classList.add('tpl-item');
-  element.innerText = item.name;
-  tplList.appendChild(element);
-  return element;
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('tpl-item');
+  const nameElement = document.createElement('div');
+  nameElement.classList.add('tpl-name');
+  nameElement.innerText = item.name;
+  wrapper.appendChild(nameElement);
+  tplList.appendChild(wrapper);
+  return wrapper;
 };
 
 /**
