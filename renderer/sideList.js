@@ -2,7 +2,7 @@
  * @Description:左边模版列表维护
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
- * @LastEditTime: 2020-11-27 10:38:16
+ * @LastEditTime: 2020-11-27 15:25:13
  * @LastEditors: tkiddo
  */
 
@@ -43,9 +43,8 @@ const setActiveItem = (target) => {
   Array.prototype.forEach.call(allElements, (ele) => {
     ele.classList.remove('tpl-item-active');
   });
-  if (target.classList.contains('tpl-item')) {
-    target.classList.add('tpl-item-active');
-  }
+  const selectedItem = target.classList.contains('tpl-item') ? target : target.parentElement;
+  selectedItem.classList.add('tpl-item-active');
 };
 
 /**
@@ -56,10 +55,14 @@ const setActiveItem = (target) => {
 const createElement = (item) => {
   const wrapper = document.createElement('div');
   wrapper.classList.add('tpl-item');
+  wrapper.setAttribute('data-name', item.name);
   const nameElement = document.createElement('div');
   nameElement.classList.add('tpl-name');
   nameElement.innerText = item.name;
+  const icon = document.createElement('i');
+  icon.classList.add('iconfont', 'icon-ashbin', 'my-icon');
   wrapper.appendChild(nameElement);
+  wrapper.appendChild(icon);
   tplList.appendChild(wrapper);
   return wrapper;
 };
@@ -71,6 +74,14 @@ const createElement = (item) => {
  */
 const addItemToList = (item) => {
   ipcRenderer.send('add-tpl-item', item);
+};
+/**
+ * @description: 删除对应元素
+ * @param {HTMLElement} item
+ * @return {*}
+ */
+const removeItem = (item) => {
+  tplList.removeChild(item);
 };
 
 /**
@@ -113,7 +124,11 @@ sureBtn.addEventListener('click', () => {
 // 列表点击事件，代理列表项点击事件
 tplList.addEventListener('click', (event) => {
   const { target } = event;
-  if (target.getAttribute('class').indexOf('tpl-list') === -1) {
+  if (target.getAttribute('class').indexOf('icon-ashbin') !== -1) {
+    const selectedItem = target.parentElement;
+    removeItem(selectedItem);
+    ipcRenderer.send('remove-tpl-item', selectedItem.getAttribute('data-name'));
+  } else if (target.getAttribute('class').indexOf('tpl-list') === -1) {
     setActiveItem(target);
   }
 });

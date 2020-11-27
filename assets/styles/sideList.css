@@ -26,3 +26,15 @@
 .tpl-item-active:hover {
   background-color: #fff;
 }
+
+.tpl-name {
+  flex: 1;
+}
+
+.my-icon {
+  opacity: 0;
+}
+
+.tpl-item:hover .my-icon {
+  opacity: 1;
+}

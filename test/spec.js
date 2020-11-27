@@ -3,7 +3,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-11-27 10:13:35
+ * @LastEditTime: 2020-11-27 15:33:29
  */
 const electron = require('electron');
 const puppeteer = require('puppeteer-core');
@@ -58,7 +58,7 @@ describe('Application launch', function () {
     assert.strictEqual(isShow, true);
   });
 
-  it('添加数据模版操作后，列表中数据加一条', async () => {
+  it('添加数据模版操作后，列表中数据加一条,并且是激活状态', async () => {
     await (await page.$('.add-tpl')).click();
     await page.waitForSelector('#tpl-add-form', { visiable: true });
     await page.type('input[name = "name"]', 'example');
@@ -68,5 +68,13 @@ describe('Application launch', function () {
     await page.evaluate(() => document.querySelector('#tpl-sure-btn').click());
     const len = await page.$eval('.tpl-list', (el) => el.children.length);
     assert.strictEqual(len, 1);
+    const className = await page.$eval('.tpl-item:last-child', (el) => el.getAttribute('class'));
+    assert.strictEqual(className.indexOf('tpl-item-active') !== -1, true);
+  });
+
+  it('点击垃圾桶图标，删除对应的数据模版', async () => {
+    await page.click('.icon-ashbin');
+    const len = await page.$eval('.tpl-list', (el) => el.children.length);
+    assert.strictEqual(len, 0);
   });
 });
