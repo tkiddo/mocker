@@ -2,12 +2,12 @@
  * @Description:左边模版列表维护
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
- * @LastEditTime: 2020-11-27 15:25:13
+ * @LastEditTime: 2020-11-28 16:12:49
  * @LastEditors: tkiddo
  */
 
 const { ipcRenderer } = require('electron');
-// const { addTab } = require('./tabs');
+const { createSection, setActiveSection, removeSection } = require('./detail.js');
 
 const tplAddBtn = document.querySelector('.add-tpl');
 const form = document.querySelector('#tpl-add-form');
@@ -35,16 +35,19 @@ const hideForm = () => {
 
 /**
  * @description: 激活选中项
- * @param {HTMLElement} target
+ * @param {String} name
  * @return {void}
  */
-const setActiveItem = (target) => {
+const setActiveItem = (name) => {
   const allElements = tplList.children;
   Array.prototype.forEach.call(allElements, (ele) => {
-    ele.classList.remove('tpl-item-active');
+    if (ele.getAttribute('data-name') === name) {
+      ele.classList.add('tpl-item-active');
+    } else {
+      ele.classList.remove('tpl-item-active');
+    }
   });
-  const selectedItem = target.classList.contains('tpl-item') ? target : target.parentElement;
-  selectedItem.classList.add('tpl-item-active');
+  setActiveSection(name);
 };
 
 /**
@@ -94,11 +97,15 @@ const initList = () => {
   if (Array.isArray(result)) {
     result.forEach((item) => {
       createElement(item);
+      createSection(item);
     });
   }
   // 监听主进程事件，并创建页面元素
   ipcRenderer.on('tpl-item-added', (event, item) => {
-    setActiveItem(createElement(item));
+    createElement(item);
+    setActiveItem(item.name);
+    createSection(item);
+    setActiveSection(item.name);
   });
 };
 
@@ -117,7 +124,6 @@ sureBtn.addEventListener('click', () => {
   const formData = new FormData(form);
   const name = formData.get('name');
   addItemToList({ name });
-  // addTab({ name });
   hideForm();
 });
 
@@ -127,9 +133,13 @@ tplList.addEventListener('click', (event) => {
   if (target.getAttribute('class').indexOf('icon-ashbin') !== -1) {
     const selectedItem = target.parentElement;
     removeItem(selectedItem);
+    removeSection(selectedItem.getAttribute('data-name'));
     ipcRenderer.send('remove-tpl-item', selectedItem.getAttribute('data-name'));
   } else if (target.getAttribute('class').indexOf('tpl-list') === -1) {
-    setActiveItem(target);
+    const selectedItem = target.classList.contains('tpl-item') ? target : target.parentElement;
+    const name = selectedItem.getAttribute('data-name');
+    setActiveItem(name);
+    setActiveSection(name);
   }
 });
 

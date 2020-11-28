@@ -2,7 +2,7 @@
  * @Description: index.html
  * @Author: tkiddo
  * @Date: 2020-11-19 14:42:51
- * @LastEditTime: 2020-11-27 09:45:17
+ * @LastEditTime: 2020-11-28 16:00:57
  * @LastEditors: tkiddo
 -->
 <!DOCTYPE html>
@@ -15,10 +15,20 @@
     <link rel="stylesheet" href="./assets/styles/form.css" />
     <link rel="stylesheet" href="./assets/styles/sideList.css" />
     <link rel="stylesheet" href="./assets/styles/tabs.css" />
+    <link rel="stylesheet" href="./assets/styles/detail.css" />
 
     <title>Mocker</title>
   </head>
   <body>
+    <!-- 数据模版内容框架 -->
+    <template id="tpl-detail">
+      <div class="detail-section">
+        <header class="detail-header">
+          <div class="add-property-btn">添加字段</div>
+        </header>
+        <main class="detail-main"></main>
+      </div>
+    </template>
     <!-- 主体结构 -->
     <div class="main">
       <div class="left-content">
@@ -26,7 +36,7 @@
         <div class="tpl-list"></div>
       </div>
       <div class="right-content">
-        <div class="tpl-tabs"></div>
+        <!-- <div class="tpl-tabs"></div> -->
       </div>
     </div>
     <!-- 新增数据模版表单 -->

@@ -3,7 +3,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-11-27 15:33:29
+ * @LastEditTime: 2020-11-28 14:05:21
  */
 const electron = require('electron');
 const puppeteer = require('puppeteer-core');
@@ -27,7 +27,7 @@ describe('Application launch', function () {
   this.timeout(10000);
 
   before(async function () {
-    emptyData();
+    // emptyData();
     app = await puppeteer.connect({ browserURL: 'http://localhost:9200' });
     [page] = await app.pages();
     page.setViewport({ width: 1080, height: 840 });
@@ -36,7 +36,7 @@ describe('Application launch', function () {
   after(async function () {
     if (app) {
       app.close();
-      emptyData();
+      // emptyData();
     }
   });
 
