@@ -10,3 +10,48 @@
 .detail-section-active {
   opacity: 1;
 }
+
+.detail-header {
+  padding: 5px 20px;
+  border-bottom: 1px solid #f2f2f2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-title {
+  font-weight: 700;
+}
+
+.add-property-btn {
+  width: 80px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  background: #f2f2f2;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.detail-main {
+  padding: 0 10px 10px 10px;
+}
+
+.property-table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+  padding: 8px;
+}
+
+.property-table > tbody > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+.property-table > tbody > tr:nth-child(2n + 1) {
+  background-color: #f9f9f9;
+}

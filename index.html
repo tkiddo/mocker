@@ -2,7 +2,7 @@
  * @Description: index.html
  * @Author: tkiddo
  * @Date: 2020-11-19 14:42:51
- * @LastEditTime: 2020-11-28 16:00:57
+ * @LastEditTime: 2020-11-30 10:38:05
  * @LastEditors: tkiddo
 -->
 <!DOCTYPE html>
@@ -20,13 +20,33 @@
     <title>Mocker</title>
   </head>
   <body>
+    <!-- 数据字段内容框架 -->
+    <template id="tpl-property">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </template>
     <!-- 数据模版内容框架 -->
     <template id="tpl-detail">
       <div class="detail-section">
         <header class="detail-header">
+          <div class="detail-title"></div>
           <div class="add-property-btn">添加字段</div>
         </header>
-        <main class="detail-main"></main>
+        <main class="detail-main">
+          <table class="property-table">
+            <thead>
+              <tr>
+                <th>名称</th>
+                <th>类型</th>
+                <th>说明</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </main>
       </div>
     </template>
     <!-- 主体结构 -->
@@ -53,6 +73,36 @@
       <div class="form-footer">
         <div class="cancel-btn" id="tpl-cancel-btn">取消</div>
         <div class="sure-btn" id="tpl-sure-btn">确定</div>
+      </div>
+    </form>
+
+    <!-- 新增数据属性表单 -->
+    <form class="form form-hide" id="property-add-form">
+      <div class="form-header">新增属性</div>
+      <div class="form-content">
+        <input name="tpl" value="" class="hidden-input" />
+        <div class="form-item">
+          <label class="form-label">名称</label>
+          <div class="form-value">
+            <input placeholder="属性名称" class="form-control" name="name" />
+          </div>
+        </div>
+        <div class="form-item">
+          <label class="form-label">类型</label>
+          <div class="form-value">
+            <input placeholder="属性类型" class="form-control" name="type" />
+          </div>
+        </div>
+        <div class="form-item">
+          <label class="form-label">说明</label>
+          <div class="form-value">
+            <input placeholder="属性说明" class="form-control" name="remark" />
+          </div>
+        </div>
+      </div>
+      <div class="form-footer">
+        <div class="cancel-btn" id="property-cancel-btn">取消</div>
+        <div class="sure-btn" id="property-sure-btn">确定</div>
       </div>
     </form>
   </body>

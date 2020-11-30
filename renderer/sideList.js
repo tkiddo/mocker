@@ -2,12 +2,12 @@
  * @Description:左边模版列表维护
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
- * @LastEditTime: 2020-11-28 16:12:49
+ * @LastEditTime: 2020-11-30 10:01:48
  * @LastEditors: tkiddo
  */
 
 const { ipcRenderer } = require('electron');
-const { createSection, setActiveSection, removeSection } = require('./detail.js');
+const { createSection, setActiveSection, removeSection } = require('./section.js');
 
 const tplAddBtn = document.querySelector('.add-tpl');
 const form = document.querySelector('#tpl-add-form');
