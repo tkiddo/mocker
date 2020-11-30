@@ -3,8 +3,10 @@
  * @Author: tkiddo
  * @Date: 2020-11-28 15:10:02
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-11-30 11:18:02
+ * @LastEditTime: 2020-11-30 16:21:04
  */
+
+const { mockData } = require('./mock.js');
 
 const rightContent = document.querySelector('.right-content');
 const detailTemplate = document.querySelector('#tpl-detail');
@@ -32,6 +34,21 @@ const hideForm = () => {
   form.classList.replace('form-show', 'form-hide');
 };
 
+const generateData = (_name) => {
+  const section = document.querySelector(`.detail-section[data-name='${_name}']`);
+  const tbody = section.querySelector('tbody');
+  const tr = tbody.querySelectorAll('tr');
+  const template = {};
+  Array.prototype.forEach.call(tr, (item) => {
+    const td = item.querySelectorAll('td');
+    const name = td[0].textContent;
+    const type = td[1].textContent;
+    template[name] = type;
+  });
+
+  mockData(template);
+};
+
 const createClone = (item) => {
   const { content } = detailTemplate;
   const { name } = item;
@@ -44,6 +61,11 @@ const createClone = (item) => {
   addBtn.addEventListener('click', () => {
     showForm(name);
   });
+  const genBtn = clone.querySelector('.gen-data-btn');
+  genBtn.addEventListener('click', () => {
+    generateData(name);
+  });
+
   return clone;
 };
 
@@ -75,14 +97,18 @@ exports.removeSection = (name) => {
 const addProperty = (data) => {
   const { content } = protertyTemplate;
   const td = content.querySelectorAll('td');
-  const { tpl, name, type, remark } = data;
+  const { tpl, name, type } = data;
   td[0].textContent = name;
   td[1].textContent = type;
-  td[2].textContent = remark;
   const clone = document.importNode(content, true);
+  const deleteBtn = clone.querySelector('.delete-property-btn');
+  deleteBtn.addEventListener('click', (event) => {
+    const { currentTarget } = event;
+    const tr = currentTarget.parentNode.parentNode;
+    tr.parentNode.removeChild(tr);
+  });
   const tplWrapper = document.querySelector(`.detail-section[data-name='${tpl}']`);
   const tbody = tplWrapper.querySelector('tbody');
-  console.log(tbody);
   tbody.appendChild(clone);
 };
 
@@ -96,8 +122,7 @@ sureBtn.addEventListener('click', () => {
   const data = {
     tpl: formData.get('tpl'),
     name: formData.get('name'),
-    type: formData.get('type'),
-    remark: formData.get('remark')
+    type: formData.get('type')
   };
   addProperty(data);
   hideForm();

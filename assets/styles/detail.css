@@ -4,11 +4,11 @@
   left: 0;
   bottom: 0;
   right: 0;
-  opacity: 0;
+  visibility: hidden;
 }
 
 .detail-section-active {
-  opacity: 1;
+  visibility: visible;
 }
 
 .detail-header {
@@ -19,19 +19,32 @@
   align-items: center;
 }
 
+.detail-operation {
+  display: flex;
+}
+
 .detail-title {
   font-weight: 700;
 }
 
-.add-property-btn {
+.common-btn {
   width: 80px;
   height: 30px;
   text-align: center;
   line-height: 30px;
-  background: #f2f2f2;
   font-size: 12px;
   border-radius: 5px;
   cursor: pointer;
+  margin: 0 5px;
+}
+
+.add-property-btn {
+  background: #f2f2f2;
+}
+
+.gen-data-btn {
+  background-color: #5cb85c;
+  color: #fff;
 }
 
 .detail-main {
@@ -42,16 +55,24 @@
   vertical-align: bottom;
   border-bottom: 2px solid #ddd;
   padding: 8px;
+  width: 25%;
 }
 
 .property-table > tbody > tr > td {
   padding: 8px;
   line-height: 1.42857143;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #ddd;
   text-align: center;
+  width: 25%;
 }
 
 .property-table > tbody > tr:nth-child(2n + 1) {
   background-color: #f9f9f9;
+}
+
+.delete-property-btn {
+  color: #fff;
+  background-color: #d9534f;
+  background-image: linear-gradient(to bottom, #d9534f 0, #c12e2a 100%);
 }

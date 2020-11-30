@@ -2,7 +2,7 @@
  * @Description: index.html
  * @Author: tkiddo
  * @Date: 2020-11-19 14:42:51
- * @LastEditTime: 2020-11-30 10:38:05
+ * @LastEditTime: 2020-11-30 15:28:49
  * @LastEditors: tkiddo
 -->
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
       <tr>
         <td></td>
         <td></td>
-        <td></td>
+        <td><button class="btn delete-property-btn">删除</button></td>
       </tr>
     </template>
     <!-- 数据模版内容框架 -->
@@ -33,7 +33,10 @@
       <div class="detail-section">
         <header class="detail-header">
           <div class="detail-title"></div>
-          <div class="add-property-btn">添加字段</div>
+          <div class="detail-operation">
+            <div class="common-btn add-property-btn">添加字段</div>
+            <div class="common-btn gen-data-btn">生成数据</div>
+          </div>
         </header>
         <main class="detail-main">
           <table class="property-table">
@@ -41,7 +44,7 @@
               <tr>
                 <th>名称</th>
                 <th>类型</th>
-                <th>说明</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -66,7 +69,7 @@
         <div class="form-item">
           <label class="form-label">名称</label>
           <div class="form-value">
-            <input placeholder="模版名称" class="form-control" name="name" />
+            <input placeholder="模版名称" class="form-control" name="name" value="students" />
           </div>
         </div>
       </div>
@@ -84,19 +87,32 @@
         <div class="form-item">
           <label class="form-label">名称</label>
           <div class="form-value">
-            <input placeholder="属性名称" class="form-control" name="name" />
+            <input placeholder="属性名称" class="form-control" name="name" value="guid" />
           </div>
         </div>
         <div class="form-item">
           <label class="form-label">类型</label>
           <div class="form-value">
-            <input placeholder="属性类型" class="form-control" name="type" />
-          </div>
-        </div>
-        <div class="form-item">
-          <label class="form-label">说明</label>
-          <div class="form-value">
-            <input placeholder="属性说明" class="form-control" name="remark" />
+            <select class="form-control" name="type">
+              <option value="@guid">guid</option>
+              <option value="@string">字符串 string</option>
+              <option value="@integer">整数 integer</option>
+              <option value="@float">浮点数 float</option>
+              <option value="@boolean">布尔值 boolean</option>
+              <option value="@date">日期 date</option>
+              <option value="@time">时间 time</option>
+              <option value="@datetime">时间日期 datetime</option>
+              <option value="@now">当前时间 now</option>
+              <option value="@image">图片 image</option>
+              <option value="@color">颜色 color</option>
+              <option value="@first">名字 first name</option>
+              <option value="@last">姓 last name</option>
+              <option value="@url">网址 url</option>
+              <option value="@domain">域名 domain</option>
+              <option value="@email">邮件 email</option>
+              <option value="@ip">ip地址 ip</option>
+              <option value="@area">地区 area</option>
+            </select>
           </div>
         </div>
       </div>
