@@ -2,7 +2,7 @@
  * @Description:左边模版列表维护
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
- * @LastEditTime: 2020-11-30 10:01:48
+ * @LastEditTime: 2020-12-01 14:59:37
  * @LastEditors: tkiddo
  */
 
@@ -84,6 +84,9 @@ const addItemToList = (item) => {
  * @return {*}
  */
 const removeItem = (item) => {
+  const previous = item.previousElementSibling;
+  const name = previous.getAttribute('data-name');
+  setActiveItem(name);
   tplList.removeChild(item);
 };
 
@@ -100,12 +103,13 @@ const initList = () => {
       createSection(item);
     });
   }
+
+  setActiveItem('welcome');
   // 监听主进程事件，并创建页面元素
   ipcRenderer.on('tpl-item-added', (event, item) => {
     createElement(item);
-    setActiveItem(item.name);
     createSection(item);
-    setActiveSection(item.name);
+    setActiveItem(item.name);
   });
 };
 
@@ -139,7 +143,6 @@ tplList.addEventListener('click', (event) => {
     const selectedItem = target.classList.contains('tpl-item') ? target : target.parentElement;
     const name = selectedItem.getAttribute('data-name');
     setActiveItem(name);
-    setActiveSection(name);
   }
 });
 

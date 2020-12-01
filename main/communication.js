@@ -3,7 +3,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-11-27 15:27:33
+ * @LastEditTime: 2020-12-01 15:27:08
  */
 /* eslint-disable no-param-reassign */
 const { ipcMain } = require('electron');
@@ -33,5 +33,12 @@ ipcMain.on('remove-tpl-item', (event, name) => {
     original.findIndex((item) => item.name === name),
     1
   );
+  writeFile(filePath, original);
+});
+
+ipcMain.on('update-tpl-item', (event, payload) => {
+  const original = readFile(filePath);
+  const index = original.findIndex((item) => item.name === payload.name);
+  original.splice(index, 1, payload);
   writeFile(filePath, original);
 });

@@ -1,8 +1,24 @@
 [
   {
-    "name": "students"
+    "name": "students",
+    "properties": [
+      {
+        "name": "guid",
+        "type": "@guid"
+      }
+    ]
   },
   {
-    "name": "sdafa"
+    "name": "1",
+    "properties": [
+      {
+        "name": "guid",
+        "type": "@guid"
+      },
+      {
+        "name": "1212",
+        "type": "@integer"
+      }
+    ]
   }
 ]

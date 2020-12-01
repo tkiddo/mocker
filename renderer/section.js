@@ -3,9 +3,9 @@
  * @Author: tkiddo
  * @Date: 2020-11-28 15:10:02
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-11-30 16:21:04
+ * @LastEditTime: 2020-12-01 15:40:02
  */
-
+const { ipcRenderer } = require('electron');
 const { mockData } = require('./mock.js');
 
 const rightContent = document.querySelector('.right-content');
@@ -46,7 +46,23 @@ const generateData = (_name) => {
     template[name] = type;
   });
 
-  mockData(template);
+  const data = mockData(template);
+  const logger = section.querySelector('.detail-logger');
+  logger.innerHTML = `<code><pre>${JSON.stringify(data, null, 2)}</pre></code>`;
+};
+
+const saveTpl = (_name) => {
+  const section = document.querySelector(`.detail-section[data-name='${_name}']`);
+  const tbody = section.querySelector('tbody');
+  const tr = tbody.querySelectorAll('tr');
+  const properties = [];
+  Array.prototype.forEach.call(tr, (item) => {
+    const td = item.querySelectorAll('td');
+    const name = td[0].textContent;
+    const type = td[1].textContent;
+    properties.push({ name, type });
+  });
+  ipcRenderer.send('update-tpl-item', { name: _name, properties });
 };
 
 const createClone = (item) => {
@@ -61,33 +77,16 @@ const createClone = (item) => {
   addBtn.addEventListener('click', () => {
     showForm(name);
   });
+  const saveBtn = clone.querySelector('.save-tpl-btn');
+  saveBtn.addEventListener('click', () => {
+    saveTpl(name);
+  });
   const genBtn = clone.querySelector('.gen-data-btn');
   genBtn.addEventListener('click', () => {
     generateData(name);
   });
 
   return clone;
-};
-
-exports.createSection = (item) => {
-  const clone = createClone(item);
-  rightContent.appendChild(clone);
-};
-
-exports.setActiveSection = (name) => {
-  const allElements = rightContent.children;
-  Array.prototype.forEach.call(allElements, (ele) => {
-    if (ele.getAttribute('data-name') === name) {
-      ele.classList.add('detail-section-active');
-    } else {
-      ele.classList.remove('detail-section-active');
-    }
-  });
-};
-
-exports.removeSection = (name) => {
-  const section = document.querySelector(`.detail-section[data-name='${name}']`);
-  rightContent.removeChild(section);
 };
 /**
  * @description: 添加属性
@@ -112,11 +111,39 @@ const addProperty = (data) => {
   tbody.appendChild(clone);
 };
 
+// 创建内容块
+exports.createSection = (item) => {
+  const clone = createClone(item);
+  rightContent.appendChild(clone);
+  if (item.properties && item.properties.length > 0) {
+    item.properties.forEach((property) => {
+      addProperty({ tpl: item.name, ...property });
+    });
+  }
+};
+// 设置激活块
+exports.setActiveSection = (name) => {
+  const allElements = rightContent.children;
+  Array.prototype.forEach.call(allElements, (ele) => {
+    if (ele.getAttribute('data-name') === name) {
+      ele.classList.add('detail-section-active');
+    } else {
+      ele.classList.remove('detail-section-active');
+    }
+  });
+};
+// 删除内容块
+exports.removeSection = (name) => {
+  const section = document.querySelector(`.detail-section[data-name='${name}']`);
+  rightContent.removeChild(section);
+};
+
 // 取消按钮点击事件
 cancelBtn.addEventListener('click', () => {
   hideForm();
 });
 
+// 确认按钮点击事件
 sureBtn.addEventListener('click', () => {
   const formData = new FormData(form);
   const data = {

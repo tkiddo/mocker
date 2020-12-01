@@ -2,7 +2,7 @@
  * @Description: index.html
  * @Author: tkiddo
  * @Date: 2020-11-19 14:42:51
- * @LastEditTime: 2020-11-30 15:28:49
+ * @LastEditTime: 2020-12-01 15:38:30
  * @LastEditors: tkiddo
 -->
 <!DOCTYPE html>
@@ -31,13 +31,13 @@
     <!-- 数据模版内容框架 -->
     <template id="tpl-detail">
       <div class="detail-section">
-        <header class="detail-header">
+        <div class="detail-header">
           <div class="detail-title"></div>
           <div class="detail-operation">
             <div class="common-btn add-property-btn">添加字段</div>
-            <div class="common-btn gen-data-btn">生成数据</div>
+            <div class="common-btn save-tpl-btn">保存模版</div>
           </div>
-        </header>
+        </div>
         <main class="detail-main">
           <table class="property-table">
             <thead>
@@ -50,16 +50,25 @@
             <tbody></tbody>
           </table>
         </main>
+        <div class="detail-header">
+          <div class="detail-title">Result</div>
+          <div class="detail-operation">
+            <div class="common-btn gen-data-btn">生成数据</div>
+          </div>
+        </div>
+        <main class="detail-logger"></main>
       </div>
     </template>
     <!-- 主体结构 -->
     <div class="main">
       <div class="left-content">
         <div class="add-tpl">新建数据模版</div>
-        <div class="tpl-list"></div>
+        <div class="tpl-list">
+          <div data-name="welcome"></div>
+        </div>
       </div>
       <div class="right-content">
-        <!-- <div class="tpl-tabs"></div> -->
+        <div class="detail-section welcome-section" data-name="welcome">欢迎使用</div>
       </div>
     </div>
     <!-- 新增数据模版表单 -->

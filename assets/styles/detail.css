@@ -1,3 +1,9 @@
+.welcome-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .detail-section {
   position: absolute;
   top: 0;
@@ -47,8 +53,14 @@
   color: #fff;
 }
 
+.save-tpl-btn {
+  color: #fff;
+  background-color: #5bc0de;
+}
+
 .detail-main {
   padding: 0 10px 10px 10px;
+  min-height: 300px;
 }
 
 .property-table > thead > tr > th {

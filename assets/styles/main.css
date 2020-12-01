@@ -24,6 +24,7 @@ table {
   bottom: 0;
   display: flex;
   background-color: #fff;
+  overflow: hidden;
 }
 
 .left-content {
