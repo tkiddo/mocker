@@ -1,4 +1,12 @@
+/*
+ * @Description: main.js
+ * @Author: tkiddo
+ * @Date: 2020-11-19 14:43:04
+ * @LastEditTime: 2020-12-02 16:52:19
+ * @LastEditors: tkiddo
+ */
 // Modules to control application life and create native browser window
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 

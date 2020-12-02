@@ -3,11 +3,10 @@
  * @Author: tkiddo
  * @Date: 2020-11-28 15:10:02
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-02 16:38:51
+ * @LastEditTime: 2020-12-02 16:51:54
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { ipcRenderer } = require('electron');
-const { mockData } = require('./mock.js');
 
 const rightContent = document.querySelector('.right-content');
 const detailTemplate = document.querySelector('#tpl-detail');
