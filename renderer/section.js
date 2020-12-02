@@ -5,6 +5,7 @@
  * @LastEditors: tkiddo
  * @LastEditTime: 2020-12-01 15:40:02
  */
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { ipcRenderer } = require('electron');
 const { mockData } = require('./mock.js');
 

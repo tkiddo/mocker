@@ -63,6 +63,7 @@
 .detail-main {
   padding: 0 10px 10px 10px;
   width: 100%;
+  min-height: 250px;
 }
 
 .property-table > thead > tr > th {

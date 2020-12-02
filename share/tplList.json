@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "name": "students",
+    "properties": [
+      {
+        "name": "guid",
+        "type": "@guid"
+      },
+      {
+        "name": "guid",
+        "type": "@float"
+      },
+      {
+        "name": "date",
+        "type": "@date"
+      }
+    ]
+  }
+]

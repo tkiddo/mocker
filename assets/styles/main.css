@@ -75,3 +75,21 @@ table {
   border-radius: 4px;
   user-select: none;
 }
+
+.common-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: (-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0 0 5px gray;
+  padding: 5px 30px;
+  z-index: 111111;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+}
+
+.fade-in {
+  opacity: 1;
+}
