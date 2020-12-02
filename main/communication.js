@@ -3,7 +3,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-01 15:27:08
+ * @LastEditTime: 2020-12-02 10:14:33
  */
 /* eslint-disable no-param-reassign */
 const { ipcMain } = require('electron');
@@ -22,7 +22,7 @@ ipcMain.on('add-tpl-item', (event, item) => {
     event.reply('task-error', '名称已存在');
     return;
   }
-  original.push(item);
+  original.unshift(item);
   writeFile(filePath, original);
   event.reply('tpl-item-added', item);
 });

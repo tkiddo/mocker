@@ -2,7 +2,7 @@
  * @Description:左边模版列表维护
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
- * @LastEditTime: 2020-12-01 14:59:37
+ * @LastEditTime: 2020-12-02 10:17:26
  * @LastEditors: tkiddo
  */
 
@@ -66,7 +66,7 @@ const createElement = (item) => {
   icon.classList.add('iconfont', 'icon-ashbin', 'my-icon');
   wrapper.appendChild(nameElement);
   wrapper.appendChild(icon);
-  tplList.appendChild(wrapper);
+  tplList.insertBefore(wrapper, tplList.firstElementChild);
   return wrapper;
 };
 
@@ -84,7 +84,7 @@ const addItemToList = (item) => {
  * @return {*}
  */
 const removeItem = (item) => {
-  const previous = item.previousElementSibling;
+  const previous = item.nextElementSibling;
   const name = previous.getAttribute('data-name');
   setActiveItem(name);
   tplList.removeChild(item);
