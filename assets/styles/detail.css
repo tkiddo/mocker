@@ -21,7 +21,7 @@
 
 .detail-header {
   padding: 5px 20px;
-  border-bottom: 1px solid #f2f2f2;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,6 +58,19 @@
 .save-tpl-btn {
   color: #fff;
   background-color: #5bc0de;
+}
+
+.detail-logger {
+  padding: 0 20px 10px 20px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.api-title {
+  font-weight: 700;
+}
+
+.api-value {
+  color: darkgray;
 }
 
 .detail-main {

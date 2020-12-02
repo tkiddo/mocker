@@ -38,6 +38,7 @@
     "spectron": "^13.0.0"
   },
   "dependencies": {
+    "http-server": "^0.12.3",
     "mockjs": "^1.1.0"
   },
   "standard": {

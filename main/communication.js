@@ -3,13 +3,14 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-02 15:46:49
+ * @LastEditTime: 2020-12-02 16:48:31
  */
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { ipcMain } = require('electron');
-const { join } = require('path');
-const { readFile, writeFile, isRepeated } = require('../utils/util');
+const { join, resolve } = require('path');
+const { readFile, writeFile, isRepeated, removeFile } = require('../utils/util');
+const { mockData } = require('./mock');
 
 const filePath = join(__dirname, '../share/tplList.json');
 
@@ -35,6 +36,8 @@ ipcMain.on('remove-tpl-item', (event, name) => {
     1
   );
   writeFile(filePath, original);
+  const file = join(__dirname, `../mock/${name}.json`);
+  removeFile(file);
 });
 
 ipcMain.on('update-tpl-item', (event, payload) => {
@@ -43,5 +46,14 @@ ipcMain.on('update-tpl-item', (event, payload) => {
   original.splice(index, 1, payload);
   writeFile(filePath, original, () => {
     event.reply('task-feedback', '保存成功！');
+  });
+});
+
+ipcMain.on('mock-data', (event, payload) => {
+  const { name, template } = payload;
+  const data = mockData(template);
+  const dest = resolve(__dirname, `../mock/${name}.json`);
+  writeFile(dest, data, () => {
+    event.reply('task-feedback', '数据生成！');
   });
 });
