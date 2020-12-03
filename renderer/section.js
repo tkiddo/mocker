@@ -3,7 +3,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-28 15:10:02
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-02 16:51:54
+ * @LastEditTime: 2020-12-03 10:30:28
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { ipcRenderer } = require('electron');
@@ -71,7 +71,7 @@ const createClone = (item) => {
   const titleELe = content.querySelector('.detail-title');
   titleELe.innerText = name;
   const hrefEle = content.querySelector('.api-value');
-  hrefEle.innerText = `http://localhost:8080/mock/${name}.json`;
+  hrefEle.innerText = `http://localhost:8080/mock/${name}`;
   const clone = document.importNode(content, true);
   const addBtn = clone.querySelector('.add-property-btn');
   addBtn.addEventListener('click', () => {

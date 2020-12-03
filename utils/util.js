@@ -2,11 +2,11 @@
  * @Description:
  * @Author: tkiddo
  * @Date: 2020-11-25 15:33:00
- * @LastEditTime: 2020-12-02 16:47:13
+ * @LastEditTime: 2020-12-03 09:52:08
  * @LastEditors: tkiddo
  */
 const fs = require('fs');
-const { join } = require('path');
+const { join, sep } = require('path');
 
 exports.readFile = (filePath) => JSON.parse(fs.readFileSync(join(filePath).toString()));
 
@@ -18,4 +18,23 @@ exports.isRepeated = (source, target) => source.findIndex((item) => item.name ==
 
 exports.removeFile = (filePath, cb = () => {}) => {
   fs.unlink(filePath, cb);
+};
+
+exports.mkdirSync = (dirpath) => {
+  if (!fs.existsSync(dirpath)) {
+    let pathtmp;
+    dirpath.split(sep).forEach((dirname) => {
+      if (pathtmp) {
+        pathtmp = join(pathtmp, dirname);
+      } else {
+        pathtmp = dirname;
+      }
+      if (!fs.existsSync(pathtmp)) {
+        if (!fs.mkdirSync(pathtmp)) {
+          return false;
+        }
+      }
+    });
+  }
+  return true;
 };
