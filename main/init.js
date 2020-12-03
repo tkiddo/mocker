@@ -2,20 +2,15 @@
  * @Description: 程序初始化
  * @Author: tkiddo
  * @Date: 2020-12-03 09:22:38
- * @LastEditTime: 2020-12-03 10:13:54
+ * @LastEditTime: 2020-12-03 20:55:19
  * @LastEditors: tkiddo
  */
 const fs = require('fs');
 
-const { listFilePath, rootDirectory, mockDirectory } = require('./constants');
-const { mkdirSync } = require('../utils/util');
-
-if (!fs.existsSync(rootDirectory)) {
-  mkdirSync(rootDirectory);
-}
+const { listFilePath, mockDirectory } = require('./constants');
 
 if (!fs.existsSync(mockDirectory)) {
-  mkdirSync(mockDirectory);
+  fs.mkdirSync(mockDirectory, { recursive: true });
 }
 
 if (!fs.existsSync(listFilePath)) {
