@@ -3,10 +3,10 @@
  * @Author: tkiddo
  * @Date: 2020-11-28 15:10:02
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-03 10:30:28
+ * @LastEditTime: 2020-12-03 13:59:33
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, shell } = require('electron');
 
 const rightContent = document.querySelector('.right-content');
 const detailTemplate = document.querySelector('#tpl-detail');
@@ -71,7 +71,9 @@ const createClone = (item) => {
   const titleELe = content.querySelector('.detail-title');
   titleELe.innerText = name;
   const hrefEle = content.querySelector('.api-value');
-  hrefEle.innerText = `http://localhost:8080/mock/${name}`;
+  const link = `http://localhost:8080/mock/${name}`;
+  hrefEle.setAttribute('href', link);
+  hrefEle.innerText = link;
   const clone = document.importNode(content, true);
   const addBtn = clone.querySelector('.add-property-btn');
   addBtn.addEventListener('click', () => {
@@ -84,6 +86,11 @@ const createClone = (item) => {
   const genBtn = clone.querySelector('.gen-data-btn');
   genBtn.addEventListener('click', () => {
     generateData(name);
+  });
+  const aLink = clone.querySelector('.api-value');
+  aLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    shell.openExternal(link);
   });
 
   return clone;

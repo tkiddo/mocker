@@ -2,7 +2,7 @@
  * @Description:
  * @Author: tkiddo
  * @Date: 2020-11-25 15:33:00
- * @LastEditTime: 2020-12-03 09:52:08
+ * @LastEditTime: 2020-12-03 13:45:36
  * @LastEditors: tkiddo
  */
 const fs = require('fs');
@@ -23,6 +23,7 @@ exports.removeFile = (filePath, cb = () => {}) => {
 exports.mkdirSync = (dirpath) => {
   if (!fs.existsSync(dirpath)) {
     let pathtmp;
+    // eslint-disable-next-line consistent-return
     dirpath.split(sep).forEach((dirname) => {
       if (pathtmp) {
         pathtmp = join(pathtmp, dirname);

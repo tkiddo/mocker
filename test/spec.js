@@ -3,14 +3,14 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-02 15:22:52
+ * @LastEditTime: 2020-12-03 13:48:48
  */
 const electron = require('electron');
 const puppeteer = require('puppeteer-core');
 const { spawn } = require('child_process');
 const assert = require('assert');
 const fs = require('fs');
-const path = require('path');
+const { listFilePath } = require('../main/constants');
 
 let spawnProcess = spawn(electron, ['.', `--remote-debugging-port=9200`], {
   shell: true
@@ -20,7 +20,7 @@ let app = null;
 let page = null;
 
 const emptyData = () => {
-  fs.writeFileSync(path.join(__dirname, '../share/tplList.json'), JSON.stringify([], null, 2));
+  fs.writeFileSync(listFilePath, JSON.stringify([], null, 2));
 };
 
 describe('Application launch', function () {
