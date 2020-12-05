@@ -7,8 +7,6 @@ name: CI
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -35,16 +33,6 @@ jobs:
       # run linting
       - name: Run Linting
         run: npm run lint:fix
-
-        # # run testing
-        # - name: Run test
-        #   run: npm run test
-
-        # - name: Upload Test Report
-        #   uses: actions/upload-artifact@v1
-        #   with:
-        #     name: report
-        #     path: report.json
 
         env:
           CI: true
