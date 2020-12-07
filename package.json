@@ -64,7 +64,9 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "platform":"all"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
