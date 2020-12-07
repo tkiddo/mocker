@@ -3,7 +3,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-04 21:26:39
+ * @LastEditTime: 2020-12-07 10:13:51
 -->
 
 # mocker
@@ -20,10 +20,10 @@ cd mocker
 npm run start
 ```
 
-## 构建应用
+## 打包应用
 
 ```shell
-npm run build
+npm run make
 ```
 
 ## 应用截图
