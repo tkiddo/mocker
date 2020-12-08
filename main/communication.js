@@ -2,7 +2,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-08 14:42:43
+ * @LastEditTime: 2020-12-08 15:33:33
  * @Description: 与渲染进程沟通
  */
 
@@ -57,4 +57,17 @@ ipcMain.on('mock-data', (event, payload) => {
   writeFile(dest, data, () => {
     event.reply('task-feedback', '数据生成！');
   });
+});
+
+ipcMain.on('add-tpl-property', (event, data) => {
+  const { tpl, name, type } = data;
+  const list = readFile(listFilePath);
+  const item = list.find((el) => el.name === tpl);
+  if (isRepeated(item.properties, name)) {
+    event.returnValue = null;
+  } else {
+    item.properties.push({ name, type });
+    writeFile(listFilePath, list);
+    event.returnValue = data;
+  }
 });

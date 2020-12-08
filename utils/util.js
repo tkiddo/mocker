@@ -1,7 +1,7 @@
 /*
  * @Author: tkiddo
  * @Date: 2020-11-25 15:33:00
- * @LastEditTime: 2020-12-08 14:48:51
+ * @LastEditTime: 2020-12-08 15:14:25
  * @LastEditors: tkiddo
  * @Description: 工具函数
  */
@@ -29,7 +29,7 @@ exports.writeFile = (filePath, content, cb = () => {}) => {
 /**
  * @description: 判重
  * @param {Array} source
- * @param {Object} target
+ * @param {String} target
  * @return {Boolean}
  */
 exports.isRepeated = (source, target) => source.findIndex((item) => item.name === target) !== -1;

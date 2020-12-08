@@ -2,11 +2,13 @@
  * @Author: tkiddo
  * @Date: 2020-11-30 08:48:04
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-08 14:39:53
+ * @LastEditTime: 2020-12-08 15:22:33
  * @Description: 右侧编辑区
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { ipcRenderer, shell } = require('electron');
+
+const { showToast } = require('./toast');
 
 const rightContent = document.querySelector('.right-content');
 const detailTemplate = document.querySelector('#tpl-detail');
@@ -33,7 +35,11 @@ const showForm = (tpl) => {
 const hideForm = () => {
   form.classList.replace('form-show', 'form-hide');
 };
-
+/**
+ * @description:生成数据
+ * @param {String} _name
+ * @return {*}
+ */
 const generateData = (_name) => {
   const section = document.querySelector(`.detail-section[data-name='${_name}']`);
   const tbody = section.querySelector('tbody');
@@ -48,7 +54,11 @@ const generateData = (_name) => {
 
   ipcRenderer.send('mock-data', { name: _name, template });
 };
-
+/**
+ * @description:保存模板
+ * @param {String} _name
+ * @return {*}
+ */
 const saveTpl = (_name) => {
   const section = document.querySelector(`.detail-section[data-name='${_name}']`);
   const tbody = section.querySelector('tbody');
@@ -62,7 +72,11 @@ const saveTpl = (_name) => {
   });
   ipcRenderer.send('update-tpl-item', { name: _name, properties });
 };
-
+/**
+ * @description: 创建编辑区
+ * @param {Object} item
+ * @return {*}
+ */
 const createClone = (item) => {
   const { content } = detailTemplate;
   const { name } = item;
@@ -158,6 +172,12 @@ sureBtn.addEventListener('click', () => {
     name: formData.get('name'),
     type: formData.get('type')
   };
-  addProperty(data);
+  const result = ipcRenderer.sendSync('add-tpl-property', data);
+  if (result) {
+    addProperty(data);
+  } else {
+    showToast('属性已存在！');
+  }
+
   hideForm();
 });
