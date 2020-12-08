@@ -1,10 +1,11 @@
 /*
- * @Description: 常量
  * @Author: tkiddo
  * @Date: 2020-12-03 09:30:05
- * @LastEditTime: 2020-12-03 10:14:04
+ * @LastEditTime: 2020-12-08 14:42:35
  * @LastEditors: tkiddo
+ * @Description: 常量
  */
+
 const path = require('path');
 
 const rootDirectory = `${

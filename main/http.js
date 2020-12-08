@@ -1,9 +1,9 @@
 /*
- * @Description: http服务
  * @Author: tkiddo
  * @Date: 2020-12-02 16:06:35
- * @LastEditTime: 2020-12-03 10:36:25
+ * @LastEditTime: 2020-12-08 14:43:15
  * @LastEditors: tkiddo
+ * @Description: http服务
  */
 
 // http-server
@@ -16,7 +16,7 @@ const { readFile } = require('../utils/util');
 const server = express();
 const port = 8080;
 
-const allowCrossDomain = function (req, res, next) {
+const allowCrossDomain = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');

@@ -1,9 +1,9 @@
 /*
- * @Description: 内容展示区
  * @Author: tkiddo
- * @Date: 2020-11-28 15:10:02
+ * @Date: 2020-11-30 08:48:04
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-03 13:59:33
+ * @LastEditTime: 2020-12-08 14:39:53
+ * @Description: 右侧编辑区
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { ipcRenderer, shell } = require('electron');

@@ -1,10 +1,11 @@
 /*
- * @Description:公共事件处理
  * @Author: tkiddo
  * @Date: 2020-11-25 15:48:35
- * @LastEditTime: 2020-12-02 15:47:35
  * @LastEditors: tkiddo
+ * @LastEditTime: 2020-12-08 14:40:26
+ * @Description: 公共
  */
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { ipcRenderer } = require('electron');
 

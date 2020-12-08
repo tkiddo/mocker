@@ -1,9 +1,9 @@
 /*
- * @Description: toast
  * @Author: tkiddo
  * @Date: 2020-12-02 15:29:36
- * @LastEditTime: 2020-12-02 15:50:37
  * @LastEditors: tkiddo
+ * @LastEditTime: 2020-12-08 14:42:52
+ * @Description:提示语
  */
 
 const toast = document.querySelector('.common-toast');

@@ -1,11 +1,10 @@
 /*
- * @Description:左边模版列表维护
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
- * @LastEditTime: 2020-12-02 15:29:15
  * @LastEditors: tkiddo
+ * @LastEditTime: 2020-12-08 14:41:21
+ * @Description: 左侧列表操作
  */
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { ipcRenderer } = require('electron');
 const { createSection, setActiveSection, removeSection } = require('./section.js');

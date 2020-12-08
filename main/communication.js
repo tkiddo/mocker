@@ -1,10 +1,11 @@
 /*
- * @Description: 与渲染进程沟通
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-03 10:14:45
+ * @LastEditTime: 2020-12-08 14:42:43
+ * @Description: 与渲染进程沟通
  */
+
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { ipcMain } = require('electron');
