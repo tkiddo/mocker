@@ -2,7 +2,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-08 15:33:33
+ * @LastEditTime: 2020-12-08 22:08:46
  * @Description: 与渲染进程沟通
  */
 
@@ -22,7 +22,7 @@ ipcMain.on('get-tpl-list', (event) => {
 ipcMain.on('add-tpl-item', (event, item) => {
   const original = readFile(listFilePath);
   if (isRepeated(original, item.name)) {
-    event.reply('task-feedback', '名称已存在');
+    event.reply('task-feedback', '名称已存在!');
     return;
   }
   original.unshift(item);
