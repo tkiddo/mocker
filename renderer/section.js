@@ -2,7 +2,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-30 08:48:04
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-08 15:22:33
+ * @LastEditTime: 2020-12-09 14:31:19
  * @Description: 右侧编辑区
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -54,24 +54,7 @@ const generateData = (_name) => {
 
   ipcRenderer.send('mock-data', { name: _name, template });
 };
-/**
- * @description:保存模板
- * @param {String} _name
- * @return {*}
- */
-const saveTpl = (_name) => {
-  const section = document.querySelector(`.detail-section[data-name='${_name}']`);
-  const tbody = section.querySelector('tbody');
-  const tr = tbody.querySelectorAll('tr');
-  const properties = [];
-  Array.prototype.forEach.call(tr, (item) => {
-    const td = item.querySelectorAll('td');
-    const name = td[0].textContent;
-    const type = td[1].textContent;
-    properties.push({ name, type });
-  });
-  ipcRenderer.send('update-tpl-item', { name: _name, properties });
-};
+
 /**
  * @description: 创建编辑区
  * @param {Object} item
@@ -92,10 +75,6 @@ const createClone = (item) => {
   const addBtn = clone.querySelector('.add-property-btn');
   addBtn.addEventListener('click', () => {
     showForm(name);
-  });
-  const saveBtn = clone.querySelector('.save-tpl-btn');
-  saveBtn.addEventListener('click', () => {
-    saveTpl(name);
   });
   const genBtn = clone.querySelector('.gen-data-btn');
   genBtn.addEventListener('click', () => {
@@ -126,6 +105,7 @@ const addProperty = (data) => {
     const { currentTarget } = event;
     const tr = currentTarget.parentNode.parentNode;
     tr.parentNode.removeChild(tr);
+    ipcRenderer.send('remove-tpl-property', data);
   });
   const tplWrapper = document.querySelector(`.detail-section[data-name='${tpl}']`);
   const tbody = tplWrapper.querySelector('tbody');

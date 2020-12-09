@@ -1,7 +1,7 @@
 /*
  * @Author: tkiddo
  * @Date: 2020-12-02 16:06:35
- * @LastEditTime: 2020-12-08 14:43:15
+ * @LastEditTime: 2020-12-09 14:44:17
  * @LastEditors: tkiddo
  * @Description: http服务
  */
@@ -33,4 +33,4 @@ server.get('/mock/:name', (req, res) => {
   res.json(result);
 });
 
-server.listen(port, () => console.log(`Example app listening on port ${port}!`));
+server.listen(port, () => console.log(`mocker listening on port ${port}!`));

@@ -101,7 +101,7 @@
 }
 
 .delete-property-btn {
-  color: #fff;
-  background-color: #d9534f;
-  background-image: linear-gradient(to bottom, #d9534f 0, #c12e2a 100%);
+  color: #d9534f;
+  font-size: 20px;
+  cursor: pointer;
 }

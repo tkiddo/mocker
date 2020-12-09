@@ -2,7 +2,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-08 22:08:46
+ * @LastEditTime: 2020-12-09 15:04:22
  * @Description: 与渲染进程沟通
  */
 
@@ -25,7 +25,7 @@ ipcMain.on('add-tpl-item', (event, item) => {
     event.reply('task-feedback', '名称已存在!');
     return;
   }
-  original.unshift(item);
+  original.unshift({ ...item, properties: [] });
   writeFile(listFilePath, original);
   event.reply('tpl-item-added', item);
 });
@@ -70,4 +70,13 @@ ipcMain.on('add-tpl-property', (event, data) => {
     writeFile(listFilePath, list);
     event.returnValue = data;
   }
+});
+
+ipcMain.on('remove-tpl-property', (event, data) => {
+  const { tpl, name } = data;
+  const list = readFile(listFilePath);
+  const item = list.find((el) => el.name === tpl);
+  const idx = item.properties.findIndex((el) => el.name === name);
+  item.properties.splice(idx, 1);
+  writeFile(listFilePath, list);
 });
