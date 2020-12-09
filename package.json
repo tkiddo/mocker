@@ -2,13 +2,14 @@
   "name": "mocker",
   "version": "1.0.0",
   "description": "data mocker",
-  "main": "main.js",
+  "main": "./built/main.js",
   "scripts": {
     "test": "mocha",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "start": "electron-forge start",
     "dev": "electron . --debug",
+    "build":"tsc",
     "generate-test-report": "mocha --reporter=json > report.json",
     "package": "electron-forge package",
     "make": "electron-forge make"
@@ -39,7 +40,8 @@
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.1",
     "puppeteer-core": "^5.5.0",
-    "spectron": "^13.0.0"
+    "spectron": "^13.0.0",
+    "typescript": "^4.1.2"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
@@ -65,7 +67,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "platform":"all"
+        "platform": "all"
       },
       "makers": [
         {

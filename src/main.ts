@@ -2,7 +2,7 @@
  * @Description: main.js
  * @Author: tkiddo
  * @Date: 2020-11-19 14:43:04
- * @LastEditTime: 2020-12-09 14:54:46
+ * @LastEditTime: 2020-12-09 16:30:12
  * @LastEditors: tkiddo
  */
 // Modules to control application life and create native browser window
@@ -52,7 +52,7 @@ function initialize() {
     mainWindow = new BrowserWindow(windowOptions);
 
     // and load the index.html of the app.
-    mainWindow.loadURL(path.join('file://', __dirname, '/index.html'));
+    mainWindow.loadURL(path.join('file://', __dirname, '../index.html'));
 
     if (debug) {
       // Open the DevTools.
