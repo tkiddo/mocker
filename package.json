@@ -65,7 +65,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "platform":"all"
+        "platform": "all"
       },
       "makers": [
         {
