@@ -7,12 +7,11 @@
     "test": "mocha",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint --fix .",
-    "start": "electron-forge start",
+    "start": "npm run build & electron-forge start",
     "dev": "npm run build & electron . --debug",
     "build": "tsc",
-    "generate-test-report": "mocha --reporter=json > report.json",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "package": "npm run build & electron-forge package",
+    "make": "npm run build & electron-forge make"
   },
   "repository": {
     "type": "git",

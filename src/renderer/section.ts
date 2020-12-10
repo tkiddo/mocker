@@ -2,7 +2,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-30 08:48:04
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-10 15:41:19
+ * @LastEditTime: 2020-12-10 17:17:04
  * @Description: 右侧编辑区
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -17,8 +17,8 @@ const form = <HTMLFormElement>document.querySelector('#property-add-form');
 const cancelBtn = <HTMLElement>form.querySelector('#property-cancel-btn');
 const sureBtn = <HTMLElement>form.querySelector('#property-sure-btn');
 
-import Template from '../modal/template';
-import Property from '../modal/property';
+import ITemplate from '../modal/template';
+import IProperty from '../modal/property';
 
 /**
  * @description: 显示表单
@@ -63,7 +63,7 @@ const generateData = (_name: string): void => {
  * @param {Object} item
  * @return {*}
  */
-const createClone = (item: Template): DocumentFragment => {
+const createClone = (item: ITemplate): DocumentFragment => {
   const { content } = detailTemplate;
   const { name } = item;
   const wrapper = <HTMLElement>content.querySelector('.detail-section');
@@ -96,7 +96,7 @@ const createClone = (item: Template): DocumentFragment => {
  * @param {Object} data
  * @return {*}
  */
-const addProperty = (tpl: string, data: Property): void => {
+const addProperty = (tpl: string, data: IProperty): void => {
   const { content } = protertyTemplate;
   const td = content.querySelectorAll('td');
   const { name, type } = data;
@@ -108,7 +108,7 @@ const addProperty = (tpl: string, data: Property): void => {
     const { currentTarget } = event;
     const tr = <HTMLElement>(<HTMLElement>(<HTMLElement>currentTarget).parentNode).parentNode;
     (<HTMLElement>tr.parentNode).removeChild(tr);
-    ipcRenderer.send('remove-tpl-property', data);
+    ipcRenderer.send('remove-tpl-property', { tpl, ...data });
   });
   const tplWrapper = <HTMLElement>document.querySelector(`.detail-section[data-name='${tpl}']`);
   const tbody = <HTMLElement>tplWrapper.querySelector('tbody');
@@ -116,11 +116,11 @@ const addProperty = (tpl: string, data: Property): void => {
 };
 
 // 创建内容块
-export const createSection = (item: Template): void => {
+export const createSection = (item: ITemplate): void => {
   const clone = createClone(item);
   rightContent.appendChild(clone);
   if (item.properties && item.properties.length > 0) {
-    item.properties.forEach((property: Property) => {
+    item.properties.forEach((property: IProperty) => {
       addProperty(item.name, property);
     });
   }

@@ -6,7 +6,7 @@
  * @Description: 数据模板属性
  */
 
-export default interface Property{
-  name:string;
-  type:string;
+export default interface IProperty {
+  name: string;
+  type: string;
 }
