@@ -2,7 +2,7 @@
  * @Description: main.js
  * @Author: tkiddo
  * @Date: 2020-11-19 14:43:04
- * @LastEditTime: 2020-12-10 10:05:07
+ * @LastEditTime: 2020-12-10 21:40:08
  * @LastEditors: tkiddo
  */
 // Modules to control application life and create native browser window
@@ -92,3 +92,5 @@ function initialize() {
 }
 
 initialize();
+
+console.log('hello')
