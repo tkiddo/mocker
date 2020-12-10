@@ -2,18 +2,21 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-09 15:04:22
+ * @LastEditTime: 2020-12-10 15:42:18
  * @Description: 与渲染进程沟通
  */
 
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { ipcMain } = require('electron');
-const { join, resolve } = require('path');
-const { readFile, writeFile, isRepeated, removeFile } = require('../utils/util');
-const { mockData } = require('./mock');
+import { ipcMain } from 'electron';
+import { join, resolve } from 'path';
+import { readFile, writeFile, isRepeated, removeFile } from '../utils/util';
+import mockData from './mock';
 
-const { listFilePath, mockDirectory } = require('./constants');
+import { listFilePath, mockDirectory } from './constants';
+
+import Template from '../modal/template';
+import Property from '../modal/property';
 
 ipcMain.on('get-tpl-list', (event) => {
   event.returnValue = readFile(listFilePath);
@@ -33,7 +36,7 @@ ipcMain.on('add-tpl-item', (event, item) => {
 ipcMain.on('remove-tpl-item', (event, name) => {
   const original = readFile(listFilePath);
   original.splice(
-    original.findIndex((item) => item.name === name),
+    original.findIndex((item: Template) => item.name === name),
     1
   );
   writeFile(listFilePath, original);
@@ -43,7 +46,7 @@ ipcMain.on('remove-tpl-item', (event, name) => {
 
 ipcMain.on('update-tpl-item', (event, payload) => {
   const original = readFile(listFilePath);
-  const index = original.findIndex((item) => item.name === payload.name);
+  const index = original.findIndex((item: Template) => item.name === payload.name);
   original.splice(index, 1, payload);
   writeFile(listFilePath, original, () => {
     event.reply('task-feedback', '保存成功！');
@@ -59,10 +62,10 @@ ipcMain.on('mock-data', (event, payload) => {
   });
 });
 
-ipcMain.on('add-tpl-property', (event, data) => {
-  const { tpl, name, type } = data;
+ipcMain.on('add-tpl-property', (event, tpl, data) => {
+  const { name, type } = data;
   const list = readFile(listFilePath);
-  const item = list.find((el) => el.name === tpl);
+  const item = list.find((el: Template) => el.name === tpl);
   if (isRepeated(item.properties, name)) {
     event.returnValue = null;
   } else {
@@ -75,8 +78,8 @@ ipcMain.on('add-tpl-property', (event, data) => {
 ipcMain.on('remove-tpl-property', (event, data) => {
   const { tpl, name } = data;
   const list = readFile(listFilePath);
-  const item = list.find((el) => el.name === tpl);
-  const idx = item.properties.findIndex((el) => el.name === name);
+  const item = list.find((el: Template) => el.name === tpl);
+  const idx = item.properties.findIndex((el: Property) => el.name === name);
   item.properties.splice(idx, 1);
   writeFile(listFilePath, list);
 });

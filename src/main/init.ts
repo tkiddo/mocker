@@ -1,13 +1,13 @@
 /*
  * @Author: tkiddo
  * @Date: 2020-12-03 09:22:38
- * @LastEditTime: 2020-12-08 14:43:39
+ * @LastEditTime: 2020-12-10 10:25:04
  * @LastEditors: tkiddo
  * @Description: 程序初始化
  */
-const fs = require('fs');
+import * as fs from 'fs';
 
-const { listFilePath, mockDirectory } = require('./constants');
+import { listFilePath, mockDirectory } from './constants';
 
 if (!fs.existsSync(mockDirectory)) {
   fs.mkdirSync(mockDirectory, { recursive: true });

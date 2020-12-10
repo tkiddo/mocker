@@ -2,18 +2,20 @@
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-08 14:41:21
+ * @LastEditTime: 2020-12-10 15:40:06
  * @Description: 左侧列表操作
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { ipcRenderer } = require('electron');
-const { createSection, setActiveSection, removeSection } = require('./section.js');
+import { ipcRenderer } from 'electron';
+import { createSection, setActiveSection, removeSection } from './section';
 
-const tplAddBtn = document.querySelector('.add-tpl');
-const form = document.querySelector('#tpl-add-form');
-const cancelBtn = document.querySelector('#tpl-cancel-btn');
-const sureBtn = document.querySelector('#tpl-sure-btn');
-const tplList = document.querySelector('.tpl-list');
+const tplAddBtn = <HTMLElement>document.querySelector('.add-tpl');
+const form = <HTMLFormElement>document.querySelector('#tpl-add-form');
+const cancelBtn = <HTMLElement>document.querySelector('#tpl-cancel-btn');
+const sureBtn = <HTMLElement>document.querySelector('#tpl-sure-btn');
+const tplList = <HTMLElement>document.querySelector('.tpl-list');
+
+import Template from '../modal/template';
 
 /**
  * @description: 显示表单
@@ -38,9 +40,9 @@ const hideForm = () => {
  * @param {String} name
  * @return {void}
  */
-const setActiveItem = (name) => {
+const setActiveItem = (name: string): void => {
   const allElements = tplList.children;
-  Array.prototype.forEach.call(allElements, (ele) => {
+  Array.prototype.forEach.call(allElements, (ele: HTMLElement) => {
     if (ele.getAttribute('data-name') === name) {
       ele.classList.add('tpl-item-active');
     } else {
@@ -55,7 +57,7 @@ const setActiveItem = (name) => {
  * @param {Object} item
  * @return {HTMLElement}
  */
-const createElement = (item) => {
+const createElement = (item: Template) => {
   const wrapper = document.createElement('div');
   wrapper.classList.add('tpl-item');
   wrapper.setAttribute('data-name', item.name);
@@ -75,7 +77,7 @@ const createElement = (item) => {
  * @param {Object} item
  * @return {void}
  */
-const addItemToList = (item) => {
+const addItemToList = (item: Template): void => {
   ipcRenderer.send('add-tpl-item', item);
 };
 /**
@@ -83,10 +85,12 @@ const addItemToList = (item) => {
  * @param {HTMLElement} item
  * @return {*}
  */
-const removeItem = (item) => {
+const removeItem = (item: HTMLElement): void => {
   const previous = item.nextElementSibling;
-  const name = previous.getAttribute('data-name');
-  setActiveItem(name);
+  if (previous) {
+    const name = previous.getAttribute('data-name') as string;
+    setActiveItem(name);
+  }
   tplList.removeChild(item);
 };
 
@@ -126,22 +130,25 @@ tplAddBtn.addEventListener('click', () => {
 // 确定按钮点击事件
 sureBtn.addEventListener('click', () => {
   const formData = new FormData(form);
-  const name = formData.get('name');
-  addItemToList({ name });
+  const name = formData.get('name') as string;
+  addItemToList({ name, properties: [] });
   hideForm();
 });
 
 // 列表点击事件，代理列表项点击事件
 tplList.addEventListener('click', (event) => {
   const { target } = event;
-  if (target.getAttribute('class').indexOf('icon-ashbin') !== -1) {
-    const selectedItem = target.parentElement;
+  const className = (<HTMLElement>target).getAttribute('class') as string;
+  if (className.indexOf('icon-ashbin') !== -1) {
+    const selectedItem = <HTMLElement>(<HTMLElement>target).parentElement;
     removeItem(selectedItem);
-    removeSection(selectedItem.getAttribute('data-name'));
+    removeSection(selectedItem.getAttribute('data-name') as string);
     ipcRenderer.send('remove-tpl-item', selectedItem.getAttribute('data-name'));
-  } else if (target.getAttribute('class').indexOf('tpl-list') === -1) {
-    const selectedItem = target.classList.contains('tpl-item') ? target : target.parentElement;
-    const name = selectedItem.getAttribute('data-name');
+  } else if (className.indexOf('tpl-list') === -1) {
+    const selectedItem = (<HTMLElement>target).classList.contains('tpl-item')
+      ? <HTMLElement>target
+      : <HTMLElement>(<HTMLElement>target).parentElement;
+    const name = selectedItem.getAttribute('data-name') as string;
     setActiveItem(name);
   }
 });

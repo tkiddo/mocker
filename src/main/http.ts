@@ -1,22 +1,22 @@
 /*
  * @Author: tkiddo
  * @Date: 2020-12-02 16:06:35
- * @LastEditTime: 2020-12-09 14:44:17
+ * @LastEditTime: 2020-12-10 14:01:38
  * @LastEditors: tkiddo
  * @Description: http服务
  */
 
 // http-server
-const express = require('express');
+import express,{Request,Response} from 'express';
 
-const path = require('path');
-const { mockDirectory } = require('./constants');
-const { readFile } = require('../utils/util');
+import path from 'path';
+import { mockDirectory } from './constants';
+import { readFile } from '../utils/util';
 
 const server = express();
 const port = 8080;
 
-const allowCrossDomain = (req, res, next) => {
+const allowCrossDomain = (req:Request, res:Response, next:Function) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');

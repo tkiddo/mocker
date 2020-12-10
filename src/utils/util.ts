@@ -1,19 +1,19 @@
 /*
  * @Author: tkiddo
  * @Date: 2020-11-25 15:33:00
- * @LastEditTime: 2020-12-08 15:14:25
+ * @LastEditTime: 2020-12-10 14:31:59
  * @LastEditors: tkiddo
  * @Description: 工具函数
  */
-const fs = require('fs');
-const { join } = require('path');
+import * as fs from 'fs';
 
 /**
  * @description: 读取文件内容
  * @param {String} filePath
  * @return {Object}
  */
-exports.readFile = (filePath) => JSON.parse(fs.readFileSync(join(filePath).toString()));
+// eslint-disable-next-line max-len
+export const readFile = (filePath:string):any => JSON.parse(fs.readFileSync(filePath).toString());
 
 /**
  * @description: 写入文件内容
@@ -22,7 +22,7 @@ exports.readFile = (filePath) => JSON.parse(fs.readFileSync(join(filePath).toStr
  * @param {Function} cb
  * @return {*}
  */
-exports.writeFile = (filePath, content, cb = () => {}) => {
+export const writeFile = (filePath:string, content:unknown, cb = () => {}):void => {
   fs.writeFile(filePath, JSON.stringify(content, null, 2), cb);
 };
 
@@ -32,14 +32,17 @@ exports.writeFile = (filePath, content, cb = () => {}) => {
  * @param {String} target
  * @return {Boolean}
  */
-exports.isRepeated = (source, target) => source.findIndex((item) => item.name === target) !== -1;
-
+interface Element{
+  name:string;
+}
+// eslint-disable-next-line max-len
+export const isRepeated = (source:[Element], target:string):boolean => source.findIndex((item) => item.name === target) !== -1;
 /**
  * @description:删除文件
  * @param {String} filePath
  * @param {Function} cb
  * @return {*}
  */
-exports.removeFile = (filePath, cb = () => {}) => {
+export const removeFile = (filePath:string, cb = () => {}):void => {
   fs.unlink(filePath, cb);
 };

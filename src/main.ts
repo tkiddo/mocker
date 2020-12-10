@@ -2,19 +2,20 @@
  * @Description: main.js
  * @Author: tkiddo
  * @Date: 2020-11-19 14:43:04
- * @LastEditTime: 2020-12-09 16:30:12
+ * @LastEditTime: 2020-12-10 10:05:07
  * @LastEditors: tkiddo
  */
 // Modules to control application life and create native browser window
+
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
+import { app, BrowserWindow } from 'electron';
+import * as path from 'path';
 
 const debug = /--debug/.test(process.argv[2]);
 
 if (process.mas) app.setName('Mocker');
 
-let mainWindow = null;
+let mainWindow:BrowserWindow | null = null;
 // Make this app a single instance app.
 //
 // The main window will be restored and focused instead of a second window
@@ -22,7 +23,7 @@ let mainWindow = null;
 //
 // Returns true if the current version of the app should quit instead of
 // launching.
-function makeSingleInstance() {
+function makeSingleInstance():void {
   if (process.mas) return;
 
   app.requestSingleInstanceLock();
@@ -87,7 +88,7 @@ function initialize() {
   // In this file you can include the rest of your app's specific main process
   // code. You can also put them in separate files and require them here.
   // eslint-disable-next-line global-require
-  require('./main/index.js');
+  require('./main/index.ts');
 }
 
 initialize();
