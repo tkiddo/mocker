@@ -7,7 +7,7 @@
  */
 
 import Mock from 'mockjs';
-import ITemplate from '../modal/template';
+import ITemplate from '../model/template';
 
 export default function mockData(template: ITemplate) {
   const data = Mock.mock({

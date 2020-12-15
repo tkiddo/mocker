@@ -2,7 +2,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-30 08:48:04
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-10 17:17:04
+ * @LastEditTime: 2020-12-15 16:05:03
  * @Description: 右侧编辑区
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -17,8 +17,8 @@ const form = <HTMLFormElement>document.querySelector('#property-add-form');
 const cancelBtn = <HTMLElement>form.querySelector('#property-cancel-btn');
 const sureBtn = <HTMLElement>form.querySelector('#property-sure-btn');
 
-import ITemplate from '../modal/template';
-import IProperty from '../modal/property';
+import ITemplate from '../model/template';
+import IProperty from '../model/property';
 
 /**
  * @description: 显示表单

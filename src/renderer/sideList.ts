@@ -2,7 +2,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-23 15:18:02
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-10 15:40:06
+ * @LastEditTime: 2020-12-15 16:23:05
  * @Description: 左侧列表操作
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -15,7 +15,9 @@ const cancelBtn = <HTMLElement>document.querySelector('#tpl-cancel-btn');
 const sureBtn = <HTMLElement>document.querySelector('#tpl-sure-btn');
 const tplList = <HTMLElement>document.querySelector('.tpl-list');
 
-import Template from '../modal/template';
+import ITemplate from '../model/template';
+
+import { send } from '../utils/rpc';
 
 /**
  * @description: 显示表单
@@ -57,7 +59,7 @@ const setActiveItem = (name: string): void => {
  * @param {Object} item
  * @return {HTMLElement}
  */
-const createElement = (item: Template) => {
+const createElement = (item: ITemplate) => {
   const wrapper = document.createElement('div');
   wrapper.classList.add('tpl-item');
   wrapper.setAttribute('data-name', item.name);
@@ -77,8 +79,8 @@ const createElement = (item: Template) => {
  * @param {Object} item
  * @return {void}
  */
-const addItemToList = (item: Template): void => {
-  ipcRenderer.send('add-tpl-item', item);
+const addItemToList = (item: ITemplate): void => {
+  send('add-tpl-item', { data: item });
 };
 /**
  * @description: 删除对应元素
