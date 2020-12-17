@@ -2,13 +2,15 @@
  * @Author: tkiddo
  * @Date: 2020-11-30 08:48:04
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-15 16:05:03
+ * @LastEditTime: 2020-12-17 14:32:16
  * @Description: 右侧编辑区
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ipcRenderer, shell } from 'electron';
 
 import { showToast } from './toast';
+
+import { send } from '../utils/rpc';
 
 const rightContent = <HTMLElement>document.querySelector('.right-content');
 const detailTemplate = <HTMLTemplateElement>document.querySelector('#tpl-detail');
@@ -55,7 +57,7 @@ const generateData = (_name: string): void => {
     template[name] = type;
   });
 
-  ipcRenderer.send('mock-data', { name: _name, template });
+  send('mock-data', { data: { destination: _name, template } });
 };
 
 /**
@@ -108,7 +110,7 @@ const addProperty = (tpl: string, data: IProperty): void => {
     const { currentTarget } = event;
     const tr = <HTMLElement>(<HTMLElement>(<HTMLElement>currentTarget).parentNode).parentNode;
     (<HTMLElement>tr.parentNode).removeChild(tr);
-    ipcRenderer.send('remove-tpl-property', { tpl, ...data });
+    send('remove-tpl-property', { target: tpl, data });
   });
   const tplWrapper = <HTMLElement>document.querySelector(`.detail-section[data-name='${tpl}']`);
   const tbody = <HTMLElement>tplWrapper.querySelector('tbody');
@@ -153,7 +155,7 @@ sureBtn.addEventListener('click', () => {
   const tpl = formData.get('tpl') as string;
   const name = formData.get('name') as string;
   const type = formData.get('type') as string;
-  const result = ipcRenderer.sendSync('add-tpl-property', tpl, { name, type });
+  const result = ipcRenderer.sendSync('add-tpl-property', { tpl, name, type });
   if (result) {
     addProperty(tpl, { name, type });
   } else {

@@ -2,7 +2,7 @@
  * @Author: tkiddo
  * @Date: 2020-11-26 15:20:27
  * @LastEditors: tkiddo
- * @LastEditTime: 2020-12-15 16:19:01
+ * @LastEditTime: 2020-12-17 14:26:50
  * @Description: 与渲染进程沟通
  */
 
@@ -18,14 +18,15 @@ import { listFilePath, mockDirectory } from './constants';
 import ITemplate from '../model/template';
 import IProperty from '../model/property';
 import IPayload from '../model/payload';
+import IMockOption from '../model/mockOption';
 
-import { register } from '../utils/rpc';
+import { registerMain } from '../utils/rpc';
 
 ipcMain.on('get-tpl-list', (event) => {
   event.returnValue = readFile(listFilePath);
 });
 
-register('add-tpl-item', (event, payload: IPayload<ITemplate>) => {
+registerMain('add-tpl-item', (event, payload: IPayload<ITemplate>) => {
   const original = readFile(listFilePath);
   const { data } = payload;
   if (isRepeated(original, data.name)) {
@@ -37,7 +38,7 @@ register('add-tpl-item', (event, payload: IPayload<ITemplate>) => {
   event.reply('tpl-item-added', data);
 });
 
-ipcMain.on('remove-tpl-item', (event, payload: IPayload<string>) => {
+registerMain('remove-tpl-item', (event, payload: IPayload<string>) => {
   const original = readFile(listFilePath);
   const { data } = payload;
   original.splice(
@@ -49,32 +50,40 @@ ipcMain.on('remove-tpl-item', (event, payload: IPayload<string>) => {
   removeFile(file);
 });
 
-ipcMain.on('mock-data', (event, payload) => {
-  const { name, ITemplate } = payload;
-  const data = mockData(ITemplate);
-  const dest = resolve(mockDirectory, `./${name}.json`);
+registerMain('mock-data', (event, payload: IPayload<IMockOption>) => {
+  const {
+    data: { template, destination }
+  } = payload;
+  const data = mockData(template);
+  const dest = resolve(mockDirectory, `./${destination}.json`);
   writeFile(dest, data, () => {
     event.reply('task-feedback', '数据生成！');
   });
 });
 
-ipcMain.on('add-tpl-property', (event, tpl, data) => {
-  const { name, type } = data;
+registerMain('add-tpl-property', (event, payload: IPayload<IProperty>) => {
+  const {
+    target,
+    data: { name, type }
+  } = payload;
   const list = readFile(listFilePath);
-  const item = list.find((el: ITemplate) => el.name === tpl);
+  const item = list.find((el: ITemplate) => el.name === target);
   if (isRepeated(item.properties, name)) {
     event.returnValue = null;
   } else {
     item.properties.push({ name, type });
     writeFile(listFilePath, list);
-    event.returnValue = data;
+    event.returnValue = name;
   }
 });
 
-ipcMain.on('remove-tpl-property', (event, data) => {
-  const { tpl, name } = data;
+registerMain('remove-tpl-property', (event, payload: IPayload<IProperty>) => {
+  const {
+    target,
+    data: { name }
+  } = payload;
   const list = readFile(listFilePath);
-  const item = list.find((el: ITemplate) => el.name === tpl);
+  const item = list.find((el: ITemplate) => el.name === target);
   const idx = item.properties.findIndex((el: IProperty) => el.name === name);
   item.properties.splice(idx, 1);
   writeFile(listFilePath, list);

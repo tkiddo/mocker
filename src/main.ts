@@ -2,7 +2,7 @@
  * @Description: main.js
  * @Author: tkiddo
  * @Date: 2020-11-19 14:43:04
- * @LastEditTime: 2020-12-10 21:40:08
+ * @LastEditTime: 2020-12-17 14:31:04
  * @LastEditors: tkiddo
  */
 // Modules to control application life and create native browser window
@@ -15,7 +15,7 @@ const debug = /--debug/.test(process.argv[2]);
 
 if (process.mas) app.setName('Mocker');
 
-let mainWindow:BrowserWindow | null = null;
+let mainWindow: BrowserWindow | null = null;
 // Make this app a single instance app.
 //
 // The main window will be restored and focused instead of a second window
@@ -23,7 +23,7 @@ let mainWindow:BrowserWindow | null = null;
 //
 // Returns true if the current version of the app should quit instead of
 // launching.
-function makeSingleInstance():void {
+function makeSingleInstance(): void {
   if (process.mas) return;
 
   app.requestSingleInstanceLock();
@@ -43,7 +43,7 @@ function initialize() {
     height: 840,
     title: app.getName(),
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload'),
       nodeIntegration: true
     }
   };
@@ -93,4 +93,4 @@ function initialize() {
 
 initialize();
 
-console.log('hello')
+console.log('hello');
